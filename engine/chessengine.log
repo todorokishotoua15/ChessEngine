@@ -1,0 +1,72 @@
+2025-04-17T14:31:37.190+05:30  INFO 23688 --- [engine] [main] engine.engine.EngineApplicationTests     : Starting EngineApplicationTests using Java 17.0.12 with PID 23688 (started by todor in D:\SpringBoot\Chess Project\ChessEngine\engine)
+2025-04-17T14:31:37.192+05:30  INFO 23688 --- [engine] [main] engine.engine.EngineApplicationTests     : No active profile set, falling back to 1 default profile: "default"
+2025-04-17T14:31:37.225+05:30  INFO 23688 --- [engine] [main] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://localhost:8888
+2025-04-17T14:31:37.226+05:30  INFO 23688 --- [engine] [main] o.s.c.c.c.ConfigServerConfigDataLoader   : Located environment: name=engine, profiles=[default], label=null, version=e54a9033abf6368a983c24e2fc0c39050289e21a, state=null
+2025-04-17T14:31:37.993+05:30  INFO 23688 --- [engine] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=376b2f82-a373-331b-95fa-3333cc2c3ce1
+2025-04-17T14:31:39.314+05:30  INFO 23688 --- [engine] [main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2025-04-17T14:31:39.386+05:30  WARN 23688 --- [engine] [main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-04-17T14:31:39.433+05:30  INFO 23688 --- [engine] [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2025-04-17T14:31:39.480+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2025-04-17T14:31:39.491+05:30  INFO 23688 --- [engine] [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-04-17T14:31:39.508+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2025-04-17T14:31:39.509+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2025-04-17T14:31:39.509+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2025-04-17T14:31:39.509+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2025-04-17T14:31:39.509+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2025-04-17T14:31:39.509+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2025-04-17T14:31:39.510+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2025-04-17T14:31:39.919+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2025-04-17T14:31:39.920+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2025-04-17T14:31:39.922+05:30  INFO 23688 --- [engine] [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2025-04-17T14:31:39.924+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1744880499923 with initial instances count: 0
+2025-04-17T14:31:39.927+05:30  INFO 23688 --- [engine] [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application ENGINE with eureka with status UP
+2025-04-17T14:31:39.928+05:30  INFO 23688 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1744880499928, current=UP, previous=STARTING]
+2025-04-17T14:31:39.931+05:30  INFO 23688 --- [engine] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ENGINE/172.16.224.238:engine: registering service...
+2025-04-17T14:31:39.944+05:30  INFO 23688 --- [engine] [main] engine.engine.EngineApplicationTests     : Started EngineApplicationTests in 4.604 seconds (process running for 5.88)
+2025-04-17T14:31:39.989+05:30  INFO 23688 --- [engine] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ENGINE/172.16.224.238:engine - registration status: 204
+2025-04-17T14:31:40.833+05:30  INFO 23688 --- [engine] [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [engine.engine.Piece.PieceTest]: PieceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-17T14:31:40.853+05:30  INFO 23688 --- [engine] [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration engine.engine.EngineApplication for test class engine.engine.Piece.PieceTest
+2025-04-17T14:31:40.896+05:30  INFO 23688 --- [engine] [SpringApplicationShutdownHook] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application ENGINE with eureka with status DOWN
+2025-04-17T14:31:40.896+05:30  INFO 23688 --- [engine] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1744880500896, current=DOWN, previous=UP]
+2025-04-17T14:31:40.897+05:30  INFO 23688 --- [engine] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ENGINE/172.16.224.238:engine: registering service...
+2025-04-17T14:31:40.900+05:30  INFO 23688 --- [engine] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2025-04-17T14:31:40.903+05:30  INFO 23688 --- [engine] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ENGINE/172.16.224.238:engine - registration status: 204
+2025-04-17T14:31:40.904+05:30  INFO 23688 --- [engine] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2025-04-17T14:31:40.911+05:30  INFO 23688 --- [engine] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ENGINE/172.16.224.238:engine - deregister  status: 200
+2025-04-17T14:31:40.912+05:30  INFO 23688 --- [engine] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+2025-04-17T14:32:01.311+05:30  INFO 14204 --- [engine] [main] engine.engine.EngineApplicationTests     : Starting EngineApplicationTests using Java 17.0.12 with PID 14204 (started by todor in D:\SpringBoot\Chess Project\ChessEngine\engine)
+2025-04-17T14:32:01.314+05:30  INFO 14204 --- [engine] [main] engine.engine.EngineApplicationTests     : No active profile set, falling back to 1 default profile: "default"
+2025-04-17T14:32:01.350+05:30  INFO 14204 --- [engine] [main] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://localhost:8888
+2025-04-17T14:32:01.351+05:30  INFO 14204 --- [engine] [main] o.s.c.c.c.ConfigServerConfigDataLoader   : Located environment: name=engine, profiles=[default], label=null, version=e54a9033abf6368a983c24e2fc0c39050289e21a, state=null
+2025-04-17T14:32:02.103+05:30  INFO 14204 --- [engine] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=376b2f82-a373-331b-95fa-3333cc2c3ce1
+2025-04-17T14:32:03.422+05:30  INFO 14204 --- [engine] [main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2025-04-17T14:32:03.487+05:30  WARN 14204 --- [engine] [main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-04-17T14:32:03.527+05:30  INFO 14204 --- [engine] [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2025-04-17T14:32:03.574+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2025-04-17T14:32:03.588+05:30  INFO 14204 --- [engine] [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-04-17T14:32:03.604+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2025-04-17T14:32:03.604+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2025-04-17T14:32:03.604+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2025-04-17T14:32:03.605+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2025-04-17T14:32:03.605+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2025-04-17T14:32:03.605+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2025-04-17T14:32:03.605+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2025-04-17T14:32:03.939+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2025-04-17T14:32:03.940+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2025-04-17T14:32:03.942+05:30  INFO 14204 --- [engine] [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2025-04-17T14:32:03.944+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1744880523944 with initial instances count: 0
+2025-04-17T14:32:03.948+05:30  INFO 14204 --- [engine] [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application ENGINE with eureka with status UP
+2025-04-17T14:32:03.948+05:30  INFO 14204 --- [engine] [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1744880523948, current=UP, previous=STARTING]
+2025-04-17T14:32:03.951+05:30  INFO 14204 --- [engine] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ENGINE/172.16.224.238:engine: registering service...
+2025-04-17T14:32:03.963+05:30  INFO 14204 --- [engine] [main] engine.engine.EngineApplicationTests     : Started EngineApplicationTests in 4.582 seconds (process running for 5.768)
+2025-04-17T14:32:04.017+05:30  INFO 14204 --- [engine] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ENGINE/172.16.224.238:engine - registration status: 204
+2025-04-17T14:32:04.951+05:30  INFO 14204 --- [engine] [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [engine.engine.Piece.PieceTest]: PieceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-17T14:32:04.976+05:30  INFO 14204 --- [engine] [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration engine.engine.EngineApplication for test class engine.engine.Piece.PieceTest
+2025-04-17T14:32:05.020+05:30  INFO 14204 --- [engine] [SpringApplicationShutdownHook] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application ENGINE with eureka with status DOWN
+2025-04-17T14:32:05.020+05:30  INFO 14204 --- [engine] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1744880525020, current=DOWN, previous=UP]
+2025-04-17T14:32:05.021+05:30  INFO 14204 --- [engine] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ENGINE/172.16.224.238:engine: registering service...
+2025-04-17T14:32:05.027+05:30  INFO 14204 --- [engine] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2025-04-17T14:32:05.031+05:30  INFO 14204 --- [engine] [DiscoveryClient-InstanceInfoReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ENGINE/172.16.224.238:engine - registration status: 204
+2025-04-17T14:32:05.032+05:30  INFO 14204 --- [engine] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2025-04-17T14:32:05.040+05:30  INFO 14204 --- [engine] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_ENGINE/172.16.224.238:engine - deregister  status: 200
+2025-04-17T14:32:05.041+05:30  INFO 14204 --- [engine] [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient

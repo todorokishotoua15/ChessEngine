@@ -3,3 +3,7 @@ spring:
     name: chessengine
   config:
     import: configserver:http://localhost:8888
+
+logging:
+  file:
+    name: chessengine.log

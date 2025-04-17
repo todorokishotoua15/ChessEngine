@@ -1,13 +1,19 @@
-package engine.engine.Piece;
+package engine.engine.Piece.ArrayPieces;
+
+import java.util.HashMap;
 
 public class Pawn extends Piece {
 
+    public Pawn(int x_, int y_, boolean active_, int color_, HashMap<Integer, Piece> occupied) {
+        super(x_, y_, active_, color_, occupied);
+    }
+
     @Override
-    public boolean checkValidMove(int x, int y) {
+    public boolean checkValidMove(int x, int y, HashMap<Integer, Piece> occupied) {
         int x_ = this.getX(), y_ = this.getY();
-        if (x != x_) {
+        if (y != y_) {
             if (this.getColor() == 1) {
-                if (y != y_ + 1) {
+                if (x != x_ + 1) {
                     return false;
                 } else {
                     if (!occupied.containsKey(x * 8 + y))
@@ -17,7 +23,7 @@ public class Pawn extends Piece {
                     return true;
                 }
             } else {
-                if (y != y_ - 1) {
+                if (x != x_ - 1) {
                     return false;
                 } else {
                     if (!occupied.containsKey(x * 8 + y))
@@ -30,7 +36,7 @@ public class Pawn extends Piece {
         } else {
             if (occupied.containsKey(x * 8 + y))
                 return false;
-            int step = (y > y_ ? 1 : -1);
+            int step = (x > x_ ? 1 : -1);
             if (step == 1) {
                 if (this.getColor() != 1) {
                     return false;
@@ -40,10 +46,15 @@ public class Pawn extends Piece {
                     return false;
                 }
             }
-            int dis = Math.abs(y - y_);
+            int dis = Math.abs(x - x_);
             if (dis == 2) {
                 if (hasMoved) {
                     return false;
+                }
+                else {
+                    if (occupied.containsKey((x_+step)*8+y)) {
+                        return false;
+                    }
                 }
             }
             if (dis > 2)

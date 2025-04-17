@@ -1,11 +1,17 @@
-package engine.engine.Piece;
+package engine.engine.Piece.ArrayPieces;
+
+import java.util.HashMap;
 
 public class Rook extends Piece {
 
+    public Rook(int x_, int y_, boolean active_, int color_, HashMap<Integer, Piece> occupied) {
+        super(x_, y_, active_, color_, occupied);
+    }
+
     @Override
-    public boolean checkValidMove(int x, int y) {
-        if (occupied.containsKey(x*8+y)) {
-            Piece p = occupied.get(x*8+y);
+    public boolean checkValidMove(int x, int y, HashMap<Integer, Piece> occupied) {
+        if (occupied.containsKey(x * 8 + y)) {
+            Piece p = occupied.get(x * 8 + y);
             if (p.getColor() == this.getColor()) {
                 return false;
             }
@@ -23,10 +29,11 @@ public class Rook extends Piece {
         while (true) {
             y_ += stepy;
             x_ += stepx;
-            if (occupied.containsKey(x_*8 + y_)) {
+            if (y_ == y && x == x_)
+                break;
+            if (occupied.containsKey(x_ * 8 + y_)) {
                 return false;
             }
-            if (y_ == y && x == x_) break;
         }
         return true;
     }
