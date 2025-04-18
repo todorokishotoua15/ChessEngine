@@ -50,9 +50,8 @@ public class Pawn extends Piece {
             if (dis == 2) {
                 if (hasMoved) {
                     return false;
-                }
-                else {
-                    if (occupied.containsKey((x_+step)*8+y)) {
+                } else {
+                    if (occupied.containsKey((x_ + step) * 8 + y)) {
                         return false;
                     }
                 }
@@ -61,6 +60,11 @@ public class Pawn extends Piece {
                 return false;
             return true;
         }
+    }
+
+    @Override
+    public String getFenRep() {
+        return (getColor() == 1 ? "P" : "p");
     }
 
 }

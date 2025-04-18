@@ -1,0 +1,3 @@
+When adding timed play : 
+    1. Update fen string to support halfmove clock
+    2. Update fen string to support Fullmove Number

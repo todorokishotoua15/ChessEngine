@@ -21,10 +21,9 @@ public abstract class Piece {
     }
 
     public boolean move(int x, int y, HashMap<Integer, Piece> occupied) {
-        if (!checkValidMove(x, y, occupied)) {
-            return false;
-        }
-        occupied.remove(Integer.valueOf(this.x * 8 + this.y));
+
+        if (occupied.containsKey(this.x * 8 + this.y))
+            occupied.remove(Integer.valueOf(this.x * 8 + this.y));
         setHasMoved(true);
         setX(x);
         setY(y);
@@ -33,4 +32,6 @@ public abstract class Piece {
     };
 
     public abstract boolean checkValidMove(int x, int y, HashMap<Integer, Piece> occupied);
+
+    public abstract String getFenRep();
 }

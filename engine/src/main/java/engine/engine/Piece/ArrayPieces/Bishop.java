@@ -14,6 +14,7 @@ public class Bishop extends Piece {
     @Override
     public boolean checkValidMove(int x, int y, HashMap<Integer, Piece> occupied) {
         if (occupied.containsKey(x * 8 + y)) {
+            log.info("We are here");
             Piece p = occupied.get(x * 8 + y);
             if (p.getColor() == this.getColor()) {
                 return false;
@@ -39,6 +40,15 @@ public class Bishop extends Piece {
 
         }
         return true;
+    }
+
+    @Override
+    public String getFenRep() {
+        if (this.getColor() == 1) {
+            return "B";
+        } else {
+            return "b";
+        }
     }
 
 }

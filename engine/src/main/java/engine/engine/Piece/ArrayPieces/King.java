@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class King extends Piece {
 
-    public King(int x_, int y_, boolean active_, int color_,HashMap<Integer, Piece> occupied) {
+    public King(int x_, int y_, boolean active_, int color_, HashMap<Integer, Piece> occupied) {
         super(x_, y_, active_, color_, occupied);
     }
 
@@ -25,6 +25,11 @@ public class King extends Piece {
         if (occupied.containsKey(x * 8 + y))
             return false;
         return true;
+    }
+
+    @Override
+    public String getFenRep() {
+        return (getColor() == 1 ? "K" : "k");
     }
 
 }

@@ -49,4 +49,9 @@ public class Queen extends Piece {
         return true;
     }
 
+    @Override
+    public String getFenRep() {
+        return (getColor() == 1 ? "Q" : "q");
+    }
+
 }

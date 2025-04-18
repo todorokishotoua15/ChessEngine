@@ -37,4 +37,9 @@ public class Rook extends Piece {
         }
         return true;
     }
+
+    @Override
+    public String getFenRep() {
+        return (getColor() == 1 ? "R" : "r");
+    }
 }
