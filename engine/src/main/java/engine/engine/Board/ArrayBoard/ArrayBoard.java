@@ -57,6 +57,10 @@ public class ArrayBoard implements Board {
         }
     }
 
+    public int getWhoseTurn() {
+        return whoseTurn;
+    }
+
     public void reset() {
         init();
     }
@@ -101,8 +105,21 @@ public class ArrayBoard implements Board {
         }
 
         // phase 3 Castling Rights
-        fen += whiteCastling();
-        fen += blackCastling();
+        String temp1 = whiteCastling();
+        String temp2 = blackCastling();
+
+        if (temp1.equals("-")&&temp2.equals("-")) {
+            fen += '-';
+        }
+        else {
+            if (!temp1.equals("-")) {
+                fen += temp1;
+            }
+            if (!temp2.equals("-")) {
+                fen += temp2;
+            }
+        }
+
         fen += " ";
 
         // phase 4 Possible En Passant Targets
@@ -191,7 +208,7 @@ public class ArrayBoard implements Board {
         if (!occupied.containsKey(x1 * 8 + y1))
             return false;
         Piece p = occupied.get(x1 * 8 + y1);
-        if (!p.checkValidMove(x2, y2, occupied))
+        if (!p.checkValidMove(x2, y2, occupied, whoseTurn, 1))
             return false;
         int color = p.getColor();
         if (color != whoseTurn)

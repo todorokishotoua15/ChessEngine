@@ -13,4 +13,6 @@ public interface Board {
     public String enPassant();
 
     public boolean move(int x1, int y1, int x2, int y2);
+
+    public int getWhoseTurn();
 }

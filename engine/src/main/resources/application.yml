@@ -7,3 +7,5 @@ spring:
 logging:
   file:
     name: chessengine.log
+  pattern:
+    console: 

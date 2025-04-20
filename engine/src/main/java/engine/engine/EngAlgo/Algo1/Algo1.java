@@ -1,19 +1,31 @@
 package engine.engine.EngAlgo.Algo1;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import engine.engine.EngAlgo.EngAlgo;
 import engine.engine.Piece.ArrayPieces.Piece;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Algo1 implements EngAlgo {
 
     private HashMap<String, Integer> pieceValueOpening, pieceValueEnding;
     private HashMap<String, ArrayList<Integer>> positionValueOpening, positionValueEnding;
 
-    Algo1() {
+    public Algo1() {
+
+        pieceValueOpening = new HashMap<String, Integer>();
+        pieceValueEnding = new HashMap<String, Integer>();
+
+        positionValueOpening = new HashMap<String, ArrayList<Integer>>();
+        positionValueEnding = new HashMap<String, ArrayList<Integer>>();
+
         pieceValueOpening.put("P", 89);
         pieceValueOpening.put("N", 308);
         pieceValueOpening.put("B", 319);
@@ -178,7 +190,8 @@ public class Algo1 implements EngAlgo {
 
     protected ArrayList<ArrayList<Integer>> nextMovelist(HashMap<Integer, Piece> occupied, int color) {
         ArrayList<ArrayList<Integer>> possibleMoves = new ArrayList<ArrayList<Integer>>();
-        for (Map.Entry<Integer, Piece> i : occupied.entrySet()) {
+        HashMap<Integer, Piece> newOccupied = new HashMap<Integer, Piece>(occupied);
+        for (Map.Entry<Integer, Piece> i : newOccupied.entrySet()) {
             int cord = i.getKey();
             Piece p = i.getValue();
             if (p.getColor() != color)
@@ -189,7 +202,7 @@ public class Algo1 implements EngAlgo {
                 for (int ney = 0; ney < 8; ney++) {
                     if (nex == x && ney == y)
                         continue;
-                    if (p.checkValidMove(nex, ney, occupied)) {
+                    if (p.checkValidMove(nex, ney, occupied, color, 1)) {
                         possibleMoves.add(new ArrayList<Integer>(Arrays.asList(x, y, nex, ney)));
                     }
                 }
@@ -258,9 +271,112 @@ public class Algo1 implements EngAlgo {
         return (whoseTurn == 1 ? score : -score);
     }
 
+    public ArrayList<Integer> Search(HashMap<Integer, Piece> occupied, int color, int alpha, int beta, int depth) {
+
+        if (depth == 2) {
+            int score = evaluate(occupied, color);
+            return new ArrayList<Integer>(Arrays.asList(score, 0));
+        }
+
+        ArrayList<ArrayList<Integer>> nextMoves = nextMovelist(occupied, color);
+
+        int finScore = (depth % 2 == 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE), ind = -1;
+
+        for (int i = 0; i < nextMoves.size(); i++) {
+            HashMap<Integer, Piece> newOccupied = new HashMap<Integer, Piece>(occupied);
+            ArrayList<Integer> arr = nextMoves.get(i);
+            int x = arr.get(0), y = arr.get(1), nex = arr.get(2), ney = arr.get(3);
+            Piece p = newOccupied.get(x * 8 + y);
+            newOccupied.remove(x * 8 + y);
+            if (newOccupied.containsKey(nex * 8 + ney)) {
+                newOccupied.remove(nex * 8 + ney);
+            }
+
+            int px, py;
+            boolean phasmoved, pactive;
+            px = p.getX();
+            py = p.getY();
+            phasmoved = p.getHasMoved();
+            pactive = p.getActive();
+            p.move(nex, ney, newOccupied);
+
+            int score;
+            ArrayList<Integer> a = Search(newOccupied, (color ^ 1), alpha, beta, depth + 1);
+            score = a.get(0);
+            if (depth % 2 == 0) {
+                alpha = Math.max(alpha, score);
+                if (beta <= alpha) {
+                    if (score > finScore) {
+                        ind = i;
+                        finScore = score;
+                    }
+                    // undo the move
+
+                    p.setX(px);
+                    p.setY(py);
+                    p.setHasMoved(phasmoved);
+                    p.setActive(pactive);
+                    break;
+                }
+                if (score > finScore) {
+                    ind = i;
+                    finScore = score;
+                }
+            } else {
+                beta = Math.min(beta, score);
+                if (beta <= alpha) {
+                    if (score < finScore) {
+                        ind = i;
+                    }
+                    finScore = Math.min(finScore, score);
+                    // undo the move
+                    p.setX(px);
+                    p.setY(py);
+                    p.setHasMoved(phasmoved);
+                    p.setActive(pactive);
+                    break;
+                }
+                if (score < finScore) {
+                    ind = i;
+                }
+                finScore = Math.min(finScore, score);
+
+            }
+
+            // undo the move
+            // newOccupied.put(x * 8 + y, occupied.get(x * 8 + y));
+            // if (occupied.containsKey(nex * 8 + ney)) {
+            // newOccupied.put(nex * 8 + ney, occupied.get(nex * 8 + ney));
+            // } else {
+            // if (newOccupied.containsKey(nex * 8 + ney)) {
+            // newOccupied.remove(nex * 8 + ney);
+            // }
+            // }
+            p.setX(px);
+            p.setY(py);
+            p.setHasMoved(phasmoved);
+            p.setActive(pactive);
+        }
+        return new ArrayList<Integer>(Arrays.asList(finScore, ind));
+    }
+
     @Override
-    public ArrayList<Integer> nextMove(HashMap<Integer, Piece> occupied, int color) {
-        throw new UnsupportedOperationException("Unimplemented method 'nextMove'");
+    public ArrayList<Integer> nextMove(HashMap<Integer, Piece> prevoccupied, int color) {
+        HashMap<Integer, Piece> occupied = new HashMap<Integer, Piece>(prevoccupied);
+        ArrayList<ArrayList<Integer>> allmoves = nextMovelist(occupied, color);
+        log.info("All moves : {}", allmoves);
+        if (prevoccupied.containsKey(0 * 8 + 5)) {
+            log.info("{}", prevoccupied.get(0 * 8 + 5));
+            log.info("{}", prevoccupied.get(1 * 8 + 6));
+            log.info("{}", prevoccupied.get(0 * 8 + 5).checkValidMove(1, 6, occupied, 1, 1));
+        }
+
+        // log.info("{}", board.getOccupied().get((nextMove.get(0) * 8 +
+        // nextMove.get(1))));
+        ArrayList<Integer> searchResult = Search(occupied, color, Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
+        log.info("searchResult in nextMove : {}", searchResult);
+
+        return allmoves.get(searchResult.get(1));
     }
 
 }

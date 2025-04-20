@@ -1,7 +1,11 @@
 package engine.engine.Piece.ArrayPieces;
 
 import java.util.HashMap;
+import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class Pawn extends Piece {
 
     public Pawn(int x_, int y_, boolean active_, int color_, HashMap<Integer, Piece> occupied) {
@@ -9,8 +13,50 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean checkValidMove(int x, int y, HashMap<Integer, Piece> occupied) {
+    public boolean checkValidMove(int x, int y, HashMap<Integer, Piece> occupied, int whoseTurn, int type) {
         int x_ = this.getX(), y_ = this.getY();
+
+        if (type == 1) {
+            int kingx = -1, kingy = -1;
+            Piece p1 = occupied.get(x_ * 8 + y_);
+            if (occupied.containsKey(x_ * 8 + y_)) {
+                occupied.remove(x_ * 8 + y_);
+            }
+            ;
+            for (Map.Entry<Integer, Piece> i : occupied.entrySet()) {
+                int cord = i.getKey();
+                Piece p = i.getValue();
+                int currx = cord / 8, curry = cord % 8;
+                if (currx == x && curry == y)
+                    continue;
+                if (currx == x_ && curry == y_)
+                    continue;
+                boolean conditionSat = (whoseTurn == 1 ? (p.getFenRep().equals("K")) : (p.getFenRep().equals("k")));
+                if (conditionSat) {
+                    kingx = p.getX();
+                    kingy = p.getY();
+                    break;
+                }
+            }
+
+            for (Map.Entry<Integer, Piece> i : occupied.entrySet()) {
+                int cord = i.getKey();
+                Piece p = i.getValue();
+                int currx = cord / 8, curry = cord % 8;
+                if (currx == x && curry == y)
+                    continue;
+                if (currx == x_ && curry == y_)
+                    continue;
+                if (p.getColor() != whoseTurn) {
+                    if (p.checkValidMove(kingx, kingy, occupied, whoseTurn, 0)) {
+                        occupied.put(x_ * 8 + y_, p1);
+                        return false;
+                    }
+                }
+            }
+            occupied.put(x_ * 8 + y_, p1);
+        }
+
         if (y != y_) {
             if (this.getColor() == 1) {
                 if (x != x_ + 1) {
@@ -65,6 +111,12 @@ public class Pawn extends Piece {
     @Override
     public String getFenRep() {
         return (getColor() == 1 ? "P" : "p");
+    }
+
+    @Override
+    public Piece createCopy(HashMap<Integer, Piece> occupied) {
+        Piece p = new Pawn(this.x, this.y, this.hasMoved, this.getColor(), occupied);
+        return p;
     }
 
 }

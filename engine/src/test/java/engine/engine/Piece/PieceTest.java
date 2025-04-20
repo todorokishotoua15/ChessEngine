@@ -23,7 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootTest
 public class PieceTest {
     private static ArrayList<Piece> board;
-    private static HashMap<Integer,Piece> occupied;
+    private static HashMap<Integer, Piece> occupied;
+
     @BeforeAll
     public static void setup() {
 
@@ -56,15 +57,15 @@ public class PieceTest {
 
     @Test
     public void performMoves() {
-        assertFalse(board.get(16).checkValidMove(0, 3, occupied));
-        assertTrue(board.get(16).checkValidMove(3, 0, occupied));
+        assertFalse(board.get(16).checkValidMove(0, 3, occupied, board.get(16).getColor(), 1));
+        assertTrue(board.get(16).checkValidMove(3, 0, occupied, board.get(16).getColor(), 1));
         assertTrue(board.get(16).move(3, 0, occupied));
-        assertTrue(board.get(23).checkValidMove(5, 3, occupied));
+        assertTrue(board.get(23).checkValidMove(5, 3, occupied, board.get(23).getColor(), 1));
         assertTrue(board.get(23).move(5, 3, occupied));
-        assertFalse(board.get(2).checkValidMove(1, 1, occupied));
-        assertTrue(board.get(10).checkValidMove(6, 3, occupied));
+        assertFalse(board.get(2).checkValidMove(1, 1, occupied, board.get(2).getColor(), 1));
+        assertTrue(board.get(10).checkValidMove(6, 3, occupied, board.get(10).getColor(), 1));
         assertTrue(board.get(10).move(6, 3, occupied));
-        assertTrue(board.get(10).checkValidMove(3, 0, occupied));
+        assertTrue(board.get(10).checkValidMove(3, 0, occupied, board.get(10).getColor(), 1));
         assertTrue(board.get(10).move(3, 0, occupied));
     }
 }

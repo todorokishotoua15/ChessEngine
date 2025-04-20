@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 public abstract class Piece {
-    private int x, y;
-    private boolean active;
-    private int color;
+    protected int x, y;
+    protected boolean active;
+    protected int color;
     protected boolean hasMoved;
 
     public Piece(int x_, int y_, boolean active_, int color_, HashMap<Integer, Piece> occupied) {
@@ -19,6 +19,8 @@ public abstract class Piece {
         hasMoved = false;
         occupied.put(x * 8 + y, this);
     }
+
+    public abstract Piece createCopy(HashMap<Integer, Piece> occupied);
 
     public boolean move(int x, int y, HashMap<Integer, Piece> occupied) {
 
@@ -31,7 +33,23 @@ public abstract class Piece {
         return true;
     };
 
-    public abstract boolean checkValidMove(int x, int y, HashMap<Integer, Piece> occupied);
+    public abstract boolean checkValidMove(int x, int y, HashMap<Integer, Piece> occupied, int whoseTurn, int type);
 
     public abstract String getFenRep();
+
+    public boolean getHasMoved() {
+        return hasMoved;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setHasMoved(boolean x_) {
+        hasMoved = x_;
+    }
+
+    public void setActive(boolean x_) {
+        active = x_;
+    }
 }
