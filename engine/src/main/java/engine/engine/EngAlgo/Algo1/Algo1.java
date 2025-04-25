@@ -364,17 +364,12 @@ public class Algo1 implements EngAlgo {
     public ArrayList<Integer> nextMove(HashMap<Integer, Piece> prevoccupied, int color) {
         HashMap<Integer, Piece> occupied = new HashMap<Integer, Piece>(prevoccupied);
         ArrayList<ArrayList<Integer>> allmoves = nextMovelist(occupied, color);
-        log.info("All moves : {}", allmoves);
-        if (prevoccupied.containsKey(0 * 8 + 5)) {
-            log.info("{}", prevoccupied.get(0 * 8 + 5));
-            log.info("{}", prevoccupied.get(1 * 8 + 6));
-            log.info("{}", prevoccupied.get(0 * 8 + 5).checkValidMove(1, 6, occupied, 1, 1));
-        }
+
 
         // log.info("{}", board.getOccupied().get((nextMove.get(0) * 8 +
         // nextMove.get(1))));
         ArrayList<Integer> searchResult = Search(occupied, color, Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
-        log.info("searchResult in nextMove : {}", searchResult);
+        // log.info("searchResult in nextMove : {}", searchResult);
 
         return allmoves.get(searchResult.get(1));
     }

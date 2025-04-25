@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.springframework.stereotype.Component;
 
 import engine.engine.Board.Board;
+import engine.engine.EngAlgo.EngAlgo;
+import engine.engine.EngAlgo.Algo1.Algo1;
 import engine.engine.Piece.ArrayPieces.Bishop;
 import engine.engine.Piece.ArrayPieces.King;
 import engine.engine.Piece.ArrayPieces.Knight;
@@ -22,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ArrayBoard implements Board {
     private ArrayList<Piece> pieces;
     private HashMap<Integer, Piece> occupied;
+    private EngAlgo algo;
     private int whoseTurn;
     private int enPassantx;
     private int enPassanty;
@@ -29,6 +32,7 @@ public class ArrayBoard implements Board {
     public void init() {
         pieces = new ArrayList<Piece>();
         occupied = new HashMap<Integer, Piece>();
+        algo = new Algo1();
         whoseTurn = 1;
         enPassantx = -1;
         enPassanty = -1;
@@ -232,6 +236,12 @@ public class ArrayBoard implements Board {
             }
         }
         return true;
+    }
+
+    public ArrayList<Integer> engineMove() {
+        ArrayList<Integer> nextMove = algo.nextMove(occupied, whoseTurn);
+        move(nextMove.get(0), nextMove.get(1), nextMove.get(2), nextMove.get(3));
+        return nextMove;
     }
 
 }

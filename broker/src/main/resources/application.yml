@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: broker
+  config:
+    import: configserver:http://localhost:8888
+
+# logging:
+#   file:
+#     name: broker.log
+#   pattern:
+#     console: 

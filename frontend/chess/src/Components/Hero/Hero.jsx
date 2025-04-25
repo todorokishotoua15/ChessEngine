@@ -22,6 +22,9 @@ const Hero = () => {
                 <Row className="mt-4">
                     <Col className="d-flex justify-content-center">
                         <Button variant="outlined" startIcon={<PlayIcon size={24} />} size='large'
+                            onClick={() => {
+                                navigate("/engine");
+                            }}
                             sx={{
                                 textTransform: 'none',
                                 fontSize: '1.2rem',           // make text bigger
@@ -86,7 +89,7 @@ const Hero = () => {
 
 
                     </Col>
-                    
+
                 </Row>
             </Container>
         </div >

@@ -1,6 +1,5 @@
 {
-    "configurations": [
-        {
+    "configurations": [{
             "type": "java",
             "name": "Spring Boot-ConfigserverApplication<configserver>",
             "request": "launch",
@@ -8,7 +7,8 @@
             "mainClass": "configserver.configserver.ConfigserverApplication",
             "projectName": "configserver",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=55864 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=configserver"
         },
         {
             "type": "java",
@@ -27,6 +27,17 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "eureka.eureka.EurekaApplication",
             "projectName": "eureka",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=55865 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=eureka"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-BrokerApplication<broker>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "broker.broker.BrokerApplication",
+            "projectName": "broker",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

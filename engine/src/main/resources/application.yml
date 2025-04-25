@@ -4,8 +4,11 @@ spring:
   config:
     import: configserver:http://localhost:8888
 
-logging:
-  file:
-    name: chessengine.log
-  pattern:
-    console: 
+# logging:
+#   file:
+#     name: chessengine.log
+#   pattern:
+#     console: 
+#   level:
+#     '[org.springframework.messaging]': DEBUG
+#     '[org.springframework.web.socket]': DEBUG

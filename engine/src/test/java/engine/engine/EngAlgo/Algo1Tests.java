@@ -37,11 +37,8 @@ public class Algo1Tests {
         int iterations = 500;
         for (int i = 0; i < iterations; i++) {
             ArrayList<Integer> nextMove = algo.nextMove(board.getOccupied(), board.getWhoseTurn());
-            log.info("{}", nextMove);
-            log.info("{}", board.getOccupied().get(nextMove.get(0) * 8 + nextMove.get(1)));
 
             assertTrue(board.move(nextMove.get(0), nextMove.get(1), nextMove.get(2), nextMove.get(3)));
-            log.info("Iteration : {}, State : {}", i + 1, board.getState());
         }
 
     }
