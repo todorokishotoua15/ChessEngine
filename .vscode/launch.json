@@ -1,5 +1,6 @@
 {
-    "configurations": [{
+    "configurations": [
+        {
             "type": "java",
             "name": "Spring Boot-ConfigserverApplication<configserver>",
             "request": "launch",
@@ -18,7 +19,8 @@
             "mainClass": "engine.engine.EngineApplication",
             "projectName": "engine",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=51124 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=engine"
         },
         {
             "type": "java",
@@ -38,6 +40,17 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "broker.broker.BrokerApplication",
             "projectName": "broker",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=51123 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=broker"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AuthserviceApplication<authservice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "authservice.AuthserviceApplication",
+            "projectName": "authservice",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

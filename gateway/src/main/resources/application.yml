@@ -1,0 +1,20 @@
+spring :
+  application:
+    name : gateway
+
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders : "*"
+
+server :
+  port : 9003
+
+eureka :
+  client :
+    serviceUrl :
+      defaultZone : http://localhost:8761/eureka
