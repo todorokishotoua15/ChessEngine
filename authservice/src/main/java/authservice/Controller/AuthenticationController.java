@@ -25,7 +25,6 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
-        System.out.println("Register is called");
         return ResponseEntity.ok(service.register(request));
     }
 
@@ -43,7 +42,6 @@ public class AuthenticationController {
 
     @GetMapping("/getAllUsers")
     public ResponseEntity<List<User>> getMethodName() {
-        System.out.println("getAllUsers is called");
         return ResponseEntity.ok(repo.findAll());
     }
 

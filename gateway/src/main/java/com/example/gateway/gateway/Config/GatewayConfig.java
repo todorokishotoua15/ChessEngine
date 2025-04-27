@@ -17,10 +17,10 @@ public class GatewayConfig {
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         GatewayFilter authFilter = authenticationFilter.apply(new AuthenticationFilter.Config());
         return builder.routes()
-                // .route(
-                // p -> p.path("/game-service/**")
-                // .filters(spec -> spec.filter(loggingFilter).filter(authFilter))
-                // .uri("lb://game-service"))
+                .route(
+                p -> p.path("/gameservice/**")
+                .filters(spec -> spec.filter(authFilter))
+                .uri("lb://gameservice"))
                 .route(
                         p -> p.path("/authservice/**")
                                 .uri("lb://authservice"))

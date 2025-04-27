@@ -1,0 +1,38 @@
+users
+	email (primary key)
+	password (encrypted)
+	name
+	computerGames
+	vsGames
+	computerGamesWon
+	vsGamesWon
+	rating
+
+engine
+	id (primary key)
+	depth
+	algorithm (integer 1 - Algo1, 2 - Algo 2, and so..)
+
+game
+	id (primary key)
+	fen string 
+	player1 (foreign key)
+	player2 (foreign key) // will be null when vs engine
+	engine_id (foreign key) // will be null when vs player
+
+history
+	history_id (primary key)
+	user_email (foreign key references user email)
+	game_id (foreign key references game id)
+
+
+// functions
+save game (for a user)
+get history of all played games (for a user)
+get history of unfinished games (for a user)
+load game (for a user with a game id)
+
+
+// backend functions
+create game
+get user statistics
