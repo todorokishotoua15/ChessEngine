@@ -52,6 +52,17 @@
             "mainClass": "authservice.AuthserviceApplication",
             "projectName": "authservice",
             "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=51446 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=authservice"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-GatewayApplication<victory-square-gateway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.gateway.gateway.GatewayApplication",
+            "projectName": "victory-square-gateway",
+            "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
     ]

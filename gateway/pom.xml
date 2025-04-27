@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dev.assert.rand</groupId>
-	<artifactId>victory-square-gateway</artifactId>
+	<artifactId>gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>victory-square-gateway</name>
+	<name>gateway</name>
 	<description>Chess application backend</description>
 	<url/>
 	<licenses>

@@ -6,6 +6,7 @@ export const AppContext = createContext();
 export const ContextProvider = ({ children }) => {
     const [appState, setAppState] = useState({
         user: null,
+        token: null
     });
 
     const [color, setColor] = useState(null);
@@ -14,8 +15,9 @@ export const ContextProvider = ({ children }) => {
     const [gameOver, setGameOver] = useState(false);
     const [turn, setTurn] = useState("White");
 
-    const setUser = (user) => {
-        setAppState({ ...appState, user: user })
+
+    const setUser = (user, token) => {
+        setAppState({ ...appState, user: user, token: token })
     }
 
     const setOptions = (newColor) => {
@@ -42,7 +44,7 @@ export const ContextProvider = ({ children }) => {
     }
 
     return (
-        <AppContext.Provider value={{ appState, color, game, turn, setOptions, safeGameMutate, updateTurn }} >
+        <AppContext.Provider value={{ appState, color, game, turn, setOptions, safeGameMutate, updateTurn, setUser }} >
             {children}
         </AppContext.Provider>
     )

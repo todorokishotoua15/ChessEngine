@@ -30,7 +30,7 @@ const Footer = () => {
             <Row className='d-flex justify-content-center' style={{ marginTop: '80px' }}>
                 {/* <Col className=''> */}
                 <BottomNavigation sx={{
-                    width: '75vw', // full screen width
+                    // width: '75vw', // full screen width
                     position: 'fixed',
                     width: '100%',
                     zIndex: 1000,

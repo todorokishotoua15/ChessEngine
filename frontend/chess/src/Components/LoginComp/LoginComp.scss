@@ -1,0 +1,10 @@
+.LoginComp {
+    width: 100%;  // To make it take the full width of its parent container
+    max-width: 800px;  // You can adjust this to any desired value
+    margin: 0 auto;  // Center the div horizontally (optional)
+    display: flex;
+    justify-content: center;   // Centers content horizontally
+    align-items: center;       // Centers content vertically
+
+    margin: 0 auto;            // Centers the div horizontally within its parent
+}
