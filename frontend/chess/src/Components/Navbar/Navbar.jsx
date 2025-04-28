@@ -6,9 +6,9 @@ import Nav from 'react-bootstrap/Nav';
 import './Navbar.scss'
 
 // import { AppContext } from '../Context/AppContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
-
+import { AppContext } from "../../Context/AppContext"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -24,16 +24,24 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
 import * as React from 'react';
+import { useEffect } from 'react';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
 
-    // const { appState, setUser } = useContext(AppContext);
+    const { appState, setUser } = useContext(AppContext);
+    const [userThere, setUserThere] = useState(false);
     // const handleLogout = () => {
     //     setUser(null)
     // }
+
+    useEffect(() => {
+        if (appState.user !== null) {
+            setUserThere(true);
+        }
+    }, [])
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -52,6 +60,13 @@ const Navbar = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const handleLogout = () => {
+        setUser(null, null);
+        setUserThere(false);
+        setAnchorElUser(null);
+        localStorage.setItem("appState", null);
+    }
 
     const navigate = useNavigate()
 
@@ -153,35 +168,64 @@ const Navbar = () => {
 
 
                     </Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            <MenuItem key="Profile" onClick={handleCloseUserMenu}>
-                                <Typography sx={{ textAlign: 'center' }}>Profile</Typography>
-                            </MenuItem>
-                            <MenuItem key="Logout" onClick={handleCloseUserMenu}>
-                                <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
-                            </MenuItem>
-                        </Menu>
+                    <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', gap: 2 }}>
+                        {userThere ? (
+                            <>
+                                <Tooltip title="Open settings">
+                                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                    </IconButton>
+                                </Tooltip>
+                                <Menu
+                                    sx={{ mt: '45px' }}
+                                    id="menu-appbar"
+                                    anchorEl={anchorElUser}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorElUser)}
+                                    onClose={handleCloseUserMenu}
+                                >
+                                    <MenuItem key="Profile" onClick={handleCloseUserMenu}>
+                                        <Typography sx={{ textAlign: 'center' }}>Profile</Typography>
+                                    </MenuItem>
+                                    <MenuItem key="Logout" onClick={handleLogout}>
+                                        <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
+                                    </MenuItem>
+                                </Menu>
+                            </>
+                        ) : (
+                            <>
+                                <Button
+                                    variant="outlined"
+                                    color="inherit"
+                                    onClick={() => navigate('/login')}
+                                >
+                                    Login
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="inherit"
+                                    onClick={() => navigate('/register')}
+                                    sx={{
+                                        color: 'black',
+                                        borderColor: 'white',
+                                        '&:hover': {
+                                            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                                            borderColor: 'white',
+                                        },
+                                    }}
+                                >
+                                    Register
+                                </Button>
+                            </>
+                        )}
                     </Box>
                 </Toolbar>
             </Container>

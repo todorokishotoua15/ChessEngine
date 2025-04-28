@@ -157,6 +157,10 @@ const ChessBoard = () => {
 
     const [socketOpened, setSocketOpened] = useState(0);
 
+    const [firstMove, setFirstMove] = useState(1);
+
+    const { appState, setUser } = useContext(AppContext);
+
 
     const safeGameMutate = (modify) => {
         setGame((g) => {
@@ -164,6 +168,7 @@ const ChessBoard = () => {
             modify(updated);
             setPosition(updated.fen());
             setTurn(updated.turn());
+            setFirstMove(0);
             return updated;
         });
     };
@@ -193,7 +198,7 @@ const ChessBoard = () => {
     useEffect(() => {
         console.log('Attempting to initiate socket connection');
         // const socket = new SockJS('http://localhost:8853/ws');
-        const socket = new SockJS('https://mpntx0-ip-119-161-98-68.tunnelmole.net/ws');
+        const socket = new SockJS('http://localhost:8853/ws');
         const stompClient = new Client({
             webSocketFactory: () => socket,
             reconnectDelay: 5000,
@@ -212,8 +217,8 @@ const ChessBoard = () => {
                     let fromSquare = data.fromSquare
                     let toSquare = data.toSquare
                     let intendedId = data.to;
-                    console.log("Session id = " + sessionIdRef.current + "Intended id = " + intendedId);
-                    if (intendedId === sessionIdRef.current) {
+                    console.log("Session id = " + appState.user.email + "Intended id = " + intendedId);
+                    if (intendedId === appState.user.email) {
 
 
                         try {
@@ -249,6 +254,7 @@ const ChessBoard = () => {
         let ney;
         let ref1 = "a";
         let ref2 = "0";
+        setFirstMove(0);
         if (from.length === 3) {
             x = from.charCodeAt(2) - ref2.charCodeAt(0) - 1;
             y = from.charCodeAt(1) - ref1.charCodeAt(0);
@@ -266,15 +272,18 @@ const ChessBoard = () => {
             ney = to.charCodeAt(0) - ref1.charCodeAt(0);
         }
         // x--, nex--;
+
         const payload = JSON.stringify({
             x: x,
             y: y,
             nex: nex,
             ney: ney,
-            from: sessionIdRef.current,
+            starting: firstMove,
+            from: appState.user.email,
             to: "engine",
             fromSquare: from,
-            toSquare: to
+            toSquare: to,
+
         })
         if (stompClient && stompClient.connected) {
             console.log('Sending the move : ', from, to, payload);
@@ -342,6 +351,7 @@ const ChessBoard = () => {
         setGame(gameCopy);                // ✅ update to the new valid game
         setPosition(gameCopy.fen());     // 🧠 also update position
         setTurn(gameCopy.turn());        // ♟ show who's turn
+        setFirstMove(0);
         setSelectedSquare(null);
         setValidMoves([]);
 

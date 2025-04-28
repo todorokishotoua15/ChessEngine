@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Chess } from 'chess.js';
 export const AppContext = createContext();
@@ -15,9 +15,22 @@ export const ContextProvider = ({ children }) => {
     const [gameOver, setGameOver] = useState(false);
     const [turn, setTurn] = useState("White");
 
+    useEffect(() => {
+        if (appState.user !== null) {
+            localStorage.setItem("appState", appState);
+        }
+        else {
+            const value = localStorage.getItem("appState");
+            if (value !== null) {
+                setAppState({ ...appState, user: value.user, token: value.token });
+            }
+        }
+    }, [])
+
 
     const setUser = (user, token) => {
         setAppState({ ...appState, user: user, token: token })
+
     }
 
     const setOptions = (newColor) => {
