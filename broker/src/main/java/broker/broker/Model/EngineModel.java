@@ -17,6 +17,7 @@ public class EngineModel {
     private int y;
     private int nex;
     private int ney;
+    private int starting;
     String from;
     String to;
     String fromSquare;

@@ -31,9 +31,10 @@ public class Interaction {
 
     @PostConstruct
     public void connectToWebSocket() throws Exception {
-        String SERVER_URI = "ws://localhost:8853/ws";
-        if (stompSession != null)
+        String SERVER_URI = "ws://chess-broker:8853/ws";
+        if (stompSession != null) {
             return;
+        }
         log.info("Multiple connection");
         stompClient.connect(SERVER_URI, new StompSessionHandlerAdapter() {
 
@@ -82,10 +83,15 @@ public class Interaction {
             String id = data.getFrom();
             if (!boardMap.containsKey(id)) {
                 boardMap.put(id, new ArrayBoard());
+            } else {
+                if (data.getStarting() == 1) {
+                    boardMap.remove(id);
+                    boardMap.put(id, new ArrayBoard());
+                }
             }
             ArrayBoard board = boardMap.get(id);
-            board.move(x, y, nex, ney);
-
+            boolean ret = board.move(x, y, nex, ney);
+            log.info("Move passed ? {}", ret);
             ArrayList<Integer> nexMove = board.engineMove();
 
             log.info("nexMove : {}", nexMove);
@@ -112,7 +118,7 @@ public class Interaction {
             toSquare += Integer.toString(nexMove.get(2) + 1);
             log.info("Before creating dataToSend {} {} {} {}", fromSquare, toSquare, c1, c2, x, nex);
             EngineModel dataToSend = new EngineModel(nexMove.get(0), nexMove.get(1),
-                    nexMove.get(2), nexMove.get(3),
+                    nexMove.get(2), nexMove.get(3), 1,
                     "engine", data.getFrom(), fromSquare, toSquare);
 
             log.info("Sending move from engine to /app/moves/engineMove: {}", dataToSend);

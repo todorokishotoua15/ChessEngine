@@ -63,6 +63,17 @@
             "mainClass": "com.example.gateway.gateway.GatewayApplication",
             "projectName": "victory-square-gateway",
             "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=51566 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=victory-square-gateway"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-GameserviceApplication<gameservice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.gameservice.gameservice.GameserviceApplication",
+            "projectName": "gameservice",
+            "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
     ]

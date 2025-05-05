@@ -1,9 +1,15 @@
 spring:
   application:
     name: chessengine
-  config:
-    import: configserver:http://localhost:8888
+  # config:
+  #   import: configserver:http://localhost:8888
+server:
+  port: 9006
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://chess-eureka:8761/eureka/
 # logging:
 #   file:
 #     name: chessengine.log

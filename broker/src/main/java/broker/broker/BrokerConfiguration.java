@@ -21,8 +21,8 @@ public class BrokerConfiguration implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
-                .setAllowedOriginPatterns("http://localhost:3000")
+                .setAllowedOriginPatterns("http://chess-frontend:3000")
                 .withSockJS();
-        registry.addEndpoint("/ws").setAllowedOriginPatterns("http://localhost:3000");
+        registry.addEndpoint("/ws").setAllowedOriginPatterns("http://chess-frontend:3000");
     }
 }

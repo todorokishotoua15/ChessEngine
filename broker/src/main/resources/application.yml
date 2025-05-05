@@ -1,9 +1,14 @@
 spring:
   application:
     name: broker
-  config:
-    import: configserver:http://localhost:8888
 
+server:
+  port: 8853
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://chess-eureka:8761/eureka/
 # logging:
 #   file:
 #     name: broker.log

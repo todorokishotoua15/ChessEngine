@@ -28,7 +28,7 @@ history
 
 // functions
 save game (for a user)
-get history of all played games (for a user)
+get history of all played games (for a user)id 
 get history of unfinished games (for a user)
 load game (for a user with a game id)
 

@@ -1,0 +1,116 @@
+services:
+  chess-eureka:
+    container_name: "chess-eureka"
+    image: todorokishotoua15/chess-eureka
+    restart: always
+    ports:
+      - "8761:8761"
+    networks:
+      - chess-net
+
+  chess-configserver:
+    container_name: "chess-config"
+    image: todorokishotoua15/chess-config
+    restart: always
+    ports:
+      - "8888:8888"
+    networks:
+      - chess-net
+
+  gateway:
+    container_name: "chess-gateway"
+    image: todorokishotoua15/chess-gateway
+    restart: always
+    depends_on:
+      - chess-eureka
+    ports:
+      - "9003:9003"
+    networks:
+      - chess-net
+
+  mysql:
+    container_name: mysql
+    image: mysql/mysql-server
+    restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - chess-net
+    volumes:
+      - db-data:/var/lib/mysql/
+      - ./data.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=chess
+
+  chess-gameservice:
+    container_name: "chess-gameservice"
+    image: todorokishotoua15/chess-gameservice
+    restart: always
+    depends_on:
+      - chess-eureka
+      - mysql
+    ports:
+      - "9005:9005"
+    networks:
+      - chess-net
+
+  authservice:
+    container_name: "chess-auth"
+    image: todorokishotoua15/chess-auth
+    restart: always
+    depends_on:
+      - chess-eureka
+      - mysql
+    ports:
+      - "9001:9001"
+    networks:
+      - chess-net
+
+  broker:
+    container_name: "chess-broker"
+    image: todorokishotoua15/chess-broker
+    restart: always
+    depends_on:
+      - chess-eureka
+      - mysql
+    ports:
+      - "8853:8853"
+    networks:
+      - chess-net
+
+  chess-engine:
+    container_name: "chess-engine"
+    image: todorokishotoua15/chess-engine
+    restart: always
+    depends_on:
+      - chess-eureka
+      - mysql
+    ports:
+      - "9006:9006"
+    networks:
+      - chess-net
+
+  chess-frontend:
+    container_name: "chess-frontend"
+    image: todorokishotoua15/chess-frontend
+    restart: always
+    depends_on:
+      - chess-eureka
+      - broker
+      - mysql
+      - chess-engine
+      - gateway
+      - authservice
+      - chess-gameservice
+    ports:
+      - "3000:3000"
+    networks:
+      - chess-net
+
+volumes:
+  db-data:
+
+
+networks:
+  chess-net:
